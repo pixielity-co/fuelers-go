@@ -45,6 +45,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/logger
 
+  apps/test-scaffold:
+    dependencies:
+      '@packages/logger':
+        specifier: workspace:*
+        version: link:../../packages/logger
+
   packages/logger: {}
 
 packages:

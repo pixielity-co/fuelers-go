@@ -21,15 +21,11 @@ The monorepo is built on a modern **Turborepo + pnpm + Go Workspaces** stack. Th
 
 ## 2. 🔍 Component-Level Deep Dive
 
-### 🚀 Scaffolding Engine (`scripts/make-*.ts`)
+### 🚀 Scaffolding Engine (`scripts/make-*.ts`) [COMPLETE]
 
 - **The Good**: EJS-based templating is flexible and allows for conditional logic (like `deps` injection).
-- **The Gap**:
-  - **Dependency Resolution**: Passing `--deps logger` updates `package.json` but doesn't run `pnpm install` or update `go.mod` requirements.
-  - **Idempotency**: Scaffolding a duplicate app fails gracefully, but modifying an existing app via the script is not supported.
-- **Recommendation**:
-  1. Add an automatic `pnpm install` call at the end of the script.
-  2. Add a `go mod tidy` call per-service during scaffolding.
+- **Automation**: Now automatically runs `pnpm install` and `go mod tidy` per-service to ensure workspace integrity immediately after scaffolding.
+- **Idempotency**: Scaffolding a duplicate app fails gracefully.
 
 ### 🐳 Docker & Orchestration
 

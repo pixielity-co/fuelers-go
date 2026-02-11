@@ -192,8 +192,19 @@ function main(): void {
       cwd: ROOT,
       stdio: "inherit",
     });
+    execSync("go mod tidy", {
+      cwd: appDir,
+      stdio: "inherit",
+    });
+    console.log("\n📦 Resolving workspace dependencies...");
+    execSync("pnpm install", {
+      cwd: ROOT,
+      stdio: "inherit",
+    });
   } catch {
-    console.warn("⚠️  Sync or setup failed — run manually: pnpm setup");
+    console.warn(
+      "\n⚠️  Sync, setup, or dependency resolution failed — run manually: pnpm setup && pnpm install",
+    );
   }
 
   // ── Success message ───────────────────────────────────
