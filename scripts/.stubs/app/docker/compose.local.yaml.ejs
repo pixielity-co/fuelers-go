@@ -1,21 +1,36 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Fuelers Monorepo - Local Infrastructure Orchestration
+# Fuelers Monorepo - Local Execution Environment
 # Service: <%= nameTitle %>
 # ─────────────────────────────────────────────────────────────────────────────
 # 
-# This file manages EXTERNAL dependencies (databases, caches, brokers) 
-# required for the <%= nameTitle %> service to function during local development.
+# This file orchestrates the <%= nameTitle %> service alongside its required
+# infrastructure for local verification and manual testing.
 # ─────────────────────────────────────────────────────────────────────────────
 
 services:
-  # ─── Default Infrastructure ────────────────────────────────────────────────
-  # A simple Redis instance provided as a default cache/broker.
-  # Replace this with your specific service requirements (e.g. PostgreSQL).
+  # ─── <%= nameTitle %> Application ──────────────────────────────────────────
+  <%= name %>:
+    build:
+      context: ../../..
+      dockerfile: apps/<%= name %>/docker/Dockerfile
+    container_name: <%= name %>-app-local
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    env_file:
+      - ../env/.env
+    environment:
+      - ENV=local
+    depends_on:
+      <%= name %>-redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ─── Infrastructure ────────────────────────────────────────────────────────
   <%= name %>-redis:
     image: redis:7-alpine
     container_name: <%= name %>-infra-redis
     ports:
-      - "6379" # Dynamic mapping by default to avoid conflicts
+      - "6379" # Dynamic mapping by default
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 1s

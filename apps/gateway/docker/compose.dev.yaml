@@ -3,13 +3,7 @@
 # Service: Gateway
 # ─────────────────────────────────────────────────────────────────────────────
 # 
-# Orchestrates the Gateway service for development.
-# 
-# Usage:
-#   docker compose -f apps/gateway/docker/compose.dev.yaml up --build
-#
-# NOTE: Volumes for shared packages and workspace config have been removed
-#       as dependencies are resolved via remote registry/GitHub.
+# Orchestrates the Gateway service for development with hot-reload.
 # ─────────────────────────────────────────────────────────────────────────────
 
 services:
@@ -26,4 +20,19 @@ services:
     environment:
       - ENV=development
       - GO_ENV=development
+    depends_on:
+      gateway-redis:
+        condition: service_healthy
     restart: unless-stopped
+
+  # ─── Infrastructure ────────────────────────────────────────────────────────
+  gateway-redis:
+    image: redis:7-alpine
+    container_name: gateway-dev-redis
+    ports:
+      - "6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30

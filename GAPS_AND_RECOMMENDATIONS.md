@@ -74,7 +74,7 @@ The deployment orchestrator now intelligently resolves compose files and handles
 
 ### 2. Implement "Infrastructure-as-Code" (Local) [COMPLETE]
 
-Local infrastructure stubs now include valid mapping (e.g., Redis) to prevent empty mapping errors.
+Local infrastructure stubs now include BOTH the app service and its dependencies (e.g., Redis). This provides a complete execution environment out-of-the-box.
 
 ### 3. Pipeline of Pipelines
 
