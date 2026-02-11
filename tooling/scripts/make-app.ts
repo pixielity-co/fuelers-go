@@ -37,7 +37,7 @@ import { execSync } from "node:child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const ROOT = path.resolve(__dirname, "..");
+const ROOT = path.resolve(__dirname, "..", "..");
 const APPS_DIR = path.join(ROOT, "apps");
 const STUBS_DIR = path.join(__dirname, ".stubs", "app");
 
@@ -184,7 +184,7 @@ function main(): void {
   // ── Auto-sync go.work ─────────────────────────────────
   console.log("\n🔄 Syncing go.work and setting up environment...");
   try {
-    execSync("npx tsx scripts/go-workspace-sync.ts", {
+    execSync("npx tsx tooling/scripts/go-workspace-sync.ts", {
       cwd: ROOT,
       stdio: "inherit",
     });

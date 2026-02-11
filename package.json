@@ -19,15 +19,15 @@
     "cleanup": "pnpm clean && go clean -cache -testcache && rm -rf .turbo node_modules pnpm-lock.yaml go.work.sum && find . -type d -name 'node_modules' -prune -exec rm -rf {} + && find . -type d -name '.turbo' -prune -exec rm -rf {} + && find . -name '*.log' -delete",
     "deploy": "turbo run deploy",
     "format": "pnpm format:prettier && pnpm format:go",
-    "format:prettier": "prettier --write .",
+    "format:prettier": "prettier --write . --config tooling/linting/.prettierrc --ignore-path tooling/linting/.prettierignore",
     "format:go": "find . -name go.mod -not -path '*/node_modules/*' -execdir go fmt ./... \\;",
-    "format:check": "prettier --check .",
+    "format:check": "prettier --check . --config tooling/linting/.prettierrc --ignore-path tooling/linting/.prettierignore",
     "tidy": "go work sync && turbo run tidy",
-    "workspace:sync": "npx tsx scripts/go-workspace-sync.ts",
+    "workspace:sync": "npx tsx tooling/scripts/go-workspace-sync.ts",
     "go:sync": "go work sync",
-    "make:app": "npx tsx scripts/make-app.ts",
-    "make:package": "npx tsx scripts/make-package.ts",
-    "test:scripts": "vitest run scripts/__tests__/*.spec.ts",
+    "make:app": "npx tsx tooling/scripts/make-app.ts",
+    "make:package": "npx tsx tooling/scripts/make-package.ts",
+    "test:scripts": "vitest run tooling/scripts/__tests__/*.spec.ts",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -46,7 +46,7 @@
     "vitest": "^4.0.18"
   },
   "lint-staged": {
-    "*.{js,ts,json,md,yml,yaml}": "prettier --write",
+    "*.{js,ts,json,md,yml,yaml}": "prettier --write --config tooling/linting/.prettierrc --ignore-path tooling/linting/.prettierignore",
     "*.go": "go fmt"
   }
 }

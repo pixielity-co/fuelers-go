@@ -1,1 +1,1 @@
-npx --no -- commitlint --edit "${1}"
+npx --no -- commitlint --config tooling/linting/commitlint.config.ts --edit "${1}"

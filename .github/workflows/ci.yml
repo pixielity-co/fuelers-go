@@ -42,7 +42,7 @@ jobs:
         run: pnpm test:scripts
 
       - name: Run Turbo Build (Cache Verification)
-        run: pnpm turbo run build
+        run: pnpm build
 
       - name: Run Typechecks & Tests
-        run: pnpm turbo run typecheck test
+        run: pnpm typecheck && pnpm test
