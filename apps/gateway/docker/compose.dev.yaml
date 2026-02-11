@@ -2,7 +2,7 @@
 # Fuelers Monorepo - Development Environment
 # Service: Gateway
 # ─────────────────────────────────────────────────────────────────────────────
-# 
+#
 # Orchestrates the Gateway service for development with hot-reload.
 # ─────────────────────────────────────────────────────────────────────────────
 

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@packages/logger": "workspace:*"
-},
+  },
   "devDependencies": {},
   "peerDependencies": {}
 }

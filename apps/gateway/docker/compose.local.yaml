@@ -2,7 +2,7 @@
 # Fuelers Monorepo - Local Execution Environment
 # Service: Gateway
 # ─────────────────────────────────────────────────────────────────────────────
-# 
+#
 # This file orchestrates the Gateway service alongside its required
 # infrastructure for local verification and manual testing.
 # ─────────────────────────────────────────────────────────────────────────────
