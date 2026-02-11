@@ -76,7 +76,11 @@ The deployment orchestrator now intelligently resolves compose files and handles
 
 Local infrastructure stubs now include BOTH the app service and its dependencies (e.g., Redis). This provides a complete execution environment out-of-the-box.
 
-### 3. Pipeline of Pipelines
+### 3. Automated Quality Control [COMPLETE]
+
+Implemented **Husky** and **lint-staged**. All code is automatically formatted and validated before it ever leaves the developer's machine.
+
+### 4. Pipeline of Pipelines [COMPLETE]
 
 Create `.github/workflows/ci.yml`:
 

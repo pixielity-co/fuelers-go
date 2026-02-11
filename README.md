@@ -116,9 +116,11 @@ Every service is production-ready out of the box.
 
 ## 🧪 Quality Control
 
-1.  **Strict Linting**: Powered by `golangci-lint` (where configured).
-2.  **Formatting**: Prettier for configuration files; `go fmt` for logic.
-3.  **Workspace Integrity**: `go.work` is automatically synchronized on every package creation.
+1.  **Git Hooks (Husky)**: Automated formatting and validation on every commit.
+2.  **Lint-Staged**: Only the files you change are formatted and checked, keeping commits fast.
+3.  **Strict Linting**: Powered by `golangci-lint` (where configured).
+4.  **Formatting**: Prettier for configuration files; `go fmt` for logic.
+5.  **Workspace Integrity**: `go.work` is automatically synchronized on every package creation.
 
 ---
 

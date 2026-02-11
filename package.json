@@ -27,16 +27,23 @@
     "go:sync": "go work sync",
     "make:app": "npx tsx scripts/make-app.ts",
     "make:package": "npx tsx scripts/make-package.ts",
-    "test:scripts": "vitest run scripts/__tests__/*.spec.ts"
+    "test:scripts": "vitest run scripts/__tests__/*.spec.ts",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/node": "^22.19.11",
     "ejs": "^4.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "tsx": "^4.21.0",
     "turbo": "^2.0.0",
     "typescript": "^5.0.0",
     "vitest": "^4.0.18"
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md,yml,yaml}": "prettier --write",
+    "*.go": "go fmt"
   }
 }
