@@ -6,11 +6,15 @@ FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
 
-# Copy this application's module only (deps are resolved via GitHub registry)
+# Copy the workspace configuration and shared packages
+COPY go.work go.work
+COPY packages/ ./packages/
+
+# Copy this application's code
 COPY apps/<%= name %> ./apps/<%= name %>/
 
-# Download Go module dependencies
-RUN go mod download -C apps/<%= name %>
+# Download dependencies for the whole workspace (optimized for caching)
+RUN go mod download
 
 # Build the binary
 RUN CGO_ENABLED=0 GOOS=linux go build \
@@ -26,8 +30,8 @@ RUN apk --no-cache add ca-certificates tzdata
 
 WORKDIR /
 
-COPY --from=builder /bin/<%= name %> /<%= name %>
+COPY --from=builder /bin/<%= name %> /bin/<%= name %>
 
 EXPOSE 8080
 
-ENTRYPOINT ["/<%= name %>"]
+ENTRYPOINT ["/bin/<%= name %>"]

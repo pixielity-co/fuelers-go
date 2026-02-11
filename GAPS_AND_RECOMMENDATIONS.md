@@ -27,25 +27,17 @@ The monorepo is built on a modern **Turborepo + pnpm + Go Workspaces** stack. Th
 - **Automation**: Now automatically runs `pnpm install` and `go mod tidy` per-service to ensure workspace integrity immediately after scaffolding.
 - **Idempotency**: Scaffolding a duplicate app fails gracefully.
 
-### 🐳 Docker & Orchestration
+### 🐳 Docker & Orchestration [COMPLETE]
 
 - **The Good**: Multi-stage `Dockerfile` with Alpine runtime is production-ready. Separation of `compose.local`, `compose.dev`, and `compose.production` is a "Best-in-Class" pattern.
-- **The Critical Gap**:
-  - **Build Context**: The current Dockerfile only copies `apps/<%= name %>`. **It will fail to build** if the app depends on `@packages/*` because the local workspace packages aren't copied into the build context.
-  - **Caching**: `RUN go mod download` is run _after_ copying the app code in some stubs, which breaks Docker layer caching.
-- **Recommendation**:
-  1. Update the root build strategy. Either use a root-level Dockerfile or update the service Dockerfile to copy required local modules.
-  2. Fix the `COPY` linting issue: `COPY --from=builder /bin/app /bin/app` (trailing slash or explicit path).
+- **Fixed**: The `Dockerfile` now copies the entire repository context to ensure local workspace package resolution.
+- **Improved**: `go mod download` is run before code copy to optimize layer caching.
 
-### 🛠️ Developer Experience (DX)
+### 🛠️ Developer Experience (DX) [COMPLETE]
 
 - **The Good**: `air` configuration is advanced and handles graceful shutdowns + color logs.
-- **The Gap**:
-  - **Git Hooks**: No `husky` or `lint-staged`. Developers can commit unformatted code.
-  - **VS Code Associations**: `.ejs` files are currently associated with `plaintext` in some stubs to avoid lint errors, which loses syntax highlighting.
-- **Recommendation**:
-  1. Install `husky` and configure a `pre-commit` hook to run `pnpm format:check`.
-  2. Fine-tune `.vscode/settings.json` to use EJS highlighting while ignoring the underlying language diagnostics.
+- **Automated**: Integrated **Husky** and **lint-staged** for pre-commit formatting.
+- **Visuals**: Configured `.vscode/settings.json` for proper `.ejs` syntax highlighting.
 
 ---
 
@@ -66,7 +58,7 @@ The monorepo is built on a modern **Turborepo + pnpm + Go Workspaces** stack. Th
 
 ### 1. The "Monorepo Docker" Fix [COMPLETE]
 
-The deployment orchestrator now intelligently resolves compose files and handles environment-specific logic.
+The `Dockerfile` stub now copies the entire repository context to ensure local `@packages/*` are available during the build. Caching is optimized by downloading dependencies before the full copy.
 
 ### 2. Implement "Infrastructure-as-Code" (Local) [COMPLETE]
 
@@ -76,7 +68,11 @@ Local infrastructure stubs now include BOTH the app service and its dependencies
 
 Implemented **Husky** and **lint-staged**. All code is automatically formatted and validated before it ever leaves the developer's machine.
 
-### 4. Pipeline of Pipelines [COMPLETE]
+### 4. VS Code Developer Experience [COMPLETE]
+
+Fine-tuned `.vscode/settings.json` to use HTML highlighting for `.ejs` files while ignoring underlying language diagnostics.
+
+### 5. Pipeline of Pipelines [COMPLETE]
 
 Create `.github/workflows/ci.yml`:
 
@@ -91,12 +87,13 @@ jobs:
       - run: pnpm build # Let Turbo handle the caching/parallelism
 ```
 
-### 4. Logging & Tracing Context
+### 6. Logging & Tracing Context [COMPLETE]
 
-The `packages/logger` should be the first "Real" package.
+Implemented a professional `slog` wrapper in `packages/logger`.
 
-- Implement `Ctx(ctx context.Context)` helper to extract `correlation_id`.
-- Standardize JSON output for production.
+- **Context-Aware**: Uses `Ctx(ctx)` to automatically extract and log `trace_id`.
+- **Production-Ready**: Defaults to JSON output for easy ingestion by ELK/Grafana/Datadog.
+- **Correlation**: Included `WithCorrelation` helper to manage trace context flow.
 
 ---
 
