@@ -1,0 +1,40 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Fuelers Monorepo - Local Infrastructure Orchestration
+# Service: <%= nameTitle %>
+# ─────────────────────────────────────────────────────────────────────────────
+# 
+# This file manages EXTERNAL dependencies (databases, caches, brokers) 
+# required for the <%= nameTitle %> service to function during local development.
+# 
+# Usage:
+#   docker compose -f apps/<%= name %>/docker/compose.local.yaml up -d
+#   docker compose -f apps/<%= name %>/docker/compose.local.yaml down -v
+#
+# NOTE: This does NOT run the application itself; it only provides the environment.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  # ─── Placeholder Dependency ────────────────────────────────────────────────
+  # Uncomment or replace with the actual database/cache your service needs.
+  # 
+  # <%= name %>-db:
+  #   image: postgres:16-alpine
+  #   container_name: <%= name %>-db
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_USER: ${DB_USER:-user}
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD:-pass}
+  #     POSTGRES_DB: ${DB_NAME:-<%= name %>_local}
+  #   volumes:
+  #     - <%= name %>_db_data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 5
+
+volumes:
+  # Persistent storage for local infrastructure
+  # <%= name %>_db_data:
+  #   name: <%= name %>_db_data

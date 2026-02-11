@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Fuelers Monorepo - Development Environment
+# Service: <%= nameTitle %>
+# ─────────────────────────────────────────────────────────────────────────────
+# 
+# Orchestrates the <%= nameTitle %> service for development.
+# 
+# Usage:
+#   docker compose -f apps/<%= name %>/docker/compose.dev.yaml up --build
+#
+# NOTE: Volumes for shared packages and workspace config have been removed
+#       as dependencies are resolved via remote registry/GitHub.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  # ─── <%= nameTitle %> Application ──────────────────────────────────────────
+  <%= name %>:
+    build:
+      context: ../../..
+      dockerfile: apps/<%= name %>/docker/Dockerfile
+    container_name: <%= name %>-app-dev
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    env_file:
+      - ../env/.env
+    environment:
+      - ENV=development
+      - GO_ENV=development
+    restart: unless-stopped
