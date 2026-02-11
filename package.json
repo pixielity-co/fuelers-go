@@ -1,0 +1,41 @@
+{
+  "name": "fuelers-go",
+  "private": true,
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "postinstall": "pnpm workspace:sync && pnpm go:sync && turbo run tidy",
+    "setup": "turbo run setup",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "generate": "turbo run generate",
+    "clean": "turbo run clean",
+    "deploy": "turbo run deploy",
+    "format": "pnpm format:prettier && pnpm format:go",
+    "format:prettier": "prettier --write .",
+    "format:go": "find . -name go.mod -not -path '*/node_modules/*' -execdir go fmt ./... \\;",
+    "format:check": "prettier --check .",
+    "tidy": "go work sync && turbo run tidy",
+    "workspace:sync": "npx tsx scripts/go-workspace-sync.ts",
+    "go:sync": "go work sync",
+    "make:app": "npx tsx scripts/make-app.ts",
+    "make:package": "npx tsx scripts/make-package.ts",
+    "test:scripts": "vitest run scripts/__tests__/*.spec.ts"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/node": "^22.19.11",
+    "ejs": "^4.0.1",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.18"
+  }
+}

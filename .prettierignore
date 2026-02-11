@@ -1,0 +1,24 @@
+# Formatting artifacts
+dist
+tmp
+bin
+node_modules
+.turbo
+vendor
+
+# Go artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Lockfiles
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+go.work.sum
+
+# 🚨 DO NOT FORMAT STUBS
+# Prettier breaks the EJS template tags and structure
+scripts/.stubs

@@ -1,0 +1,11 @@
+# pnpm-workspace.yaml
+# This file defines the root of the pnpm workspace and allows you to
+# manage multiple packages within a single repository.
+# In this monorepo, both applications and shared local packages are
+# recognized as individual workspaces.
+
+packages:
+  # Runnable application services
+  - "apps/*"
+  # Shared library packages
+  - "packages/*"
