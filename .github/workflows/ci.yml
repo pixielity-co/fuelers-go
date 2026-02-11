@@ -38,8 +38,11 @@ jobs:
       - name: Check Workspace Integrity
         run: pnpm workspace:sync && git diff --exit-code go.work
 
+      - name: Run Tooling Tests
+        run: pnpm test:scripts
+
       - name: Run Turbo Build (Cache Verification)
-        run: pnpm build
+        run: pnpm turbo run build
 
       - name: Run Typechecks & Tests
-        run: turbo run typecheck test
+        run: pnpm turbo run typecheck test
