@@ -1,0 +1,54 @@
+# ─────────────────────────────────────────────
+# Fuelers Monorepo - Package Air Configuration
+# For library development (no runtime execution)
+# ─────────────────────────────────────────────
+
+root = "."
+tmp_dir = "tmp"
+
+[build]
+
+# Instead of building binary, just run tests
+cmd = "go test ./..."
+
+# No binary output needed
+bin = ""
+
+delay = 200
+
+include_ext = [
+  "go",
+  "yaml",
+  "yml",
+  "json"
+]
+
+exclude_dir = [
+  "tmp",
+  "vendor",
+  "node_modules",
+  ".git",
+  ".turbo"
+]
+
+exclude_regex = [
+  "_test.go",
+  ".*\\.tmp",
+  ".*\\.swp"
+]
+
+follow_symlink = true
+stop_on_error = true
+
+[log]
+time = true
+color = true
+
+[color]
+main = "blue"
+watcher = "yellow"
+build = "green"
+
+[misc]
+poll = false
+clean_on_exit = true

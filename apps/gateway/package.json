@@ -1,0 +1,26 @@
+{
+  "name": "@apps/gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gateway application",
+  "main": "src/main.go",
+  "scripts": {
+    "setup": "mkdir -p env && cp -n env/.env.example env/.env || true",
+    "dev": "air",
+    "build": "mkdir -p bin && go build -o bin/gateway ./src/main.go",
+    "start": "./bin/gateway",
+    "test": "go test -v ./...",
+    "lint": "golangci-lint run ./...",
+    "deploy": "echo 'Deploying gateway...'",
+    "clean": "rm -rf bin tmp coverage.out",
+    "typecheck": "go vet ./...",
+    "generate": "go generate ./...",
+    "tidy": "go mod tidy",
+    "format": "go fmt ./..."
+  },
+  "dependencies": {
+    "@packages/logger": "workspace:*"
+  },
+  "devDependencies": {},
+  "peerDependencies": {}
+}

@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Fuelers Monorepo - Development Environment
+# Service: Gateway
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Orchestrates the Gateway service for development.
+#
+# Usage:
+#   docker compose -f apps/gateway/docker/compose.dev.yaml up --build
+#
+# NOTE: Volumes for shared packages and workspace config have been removed
+#       as dependencies are resolved via remote registry/GitHub.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  # ─── Gateway Application ──────────────────────────────────────────
+  gateway:
+    build:
+      context: ../../..
+      dockerfile: apps/gateway/docker/Dockerfile
+    container_name: gateway-app-dev
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    env_file:
+      - ../env/.env
+    environment:
+      - ENV=development
+      - GO_ENV=development
+    restart: unless-stopped
