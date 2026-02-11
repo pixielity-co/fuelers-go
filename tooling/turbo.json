@@ -1,0 +1,58 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "setup": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["bin/**", "dist/**"],
+      "inputs": ["src/**", "env/**", "docker/**", "go.mod", "go.sum", "package.json"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**", "env/**", "go.mod", "go.sum", "package.json", "**/*_test.go"],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "typecheck": {
+      "outputs": []
+    },
+    "generate": {
+      "outputs": ["**/gen/**"]
+    },
+    "tidy": {
+      "cache": false
+    },
+    "format": {
+      "cache": false
+    },
+    "clean": {
+      "cache": false
+    },
+    "deploy": {
+      "dependsOn": ["build", "test", "lint"],
+      "cache": false
+    }
+  },
+  "globalDependencies": [
+    "go.work",
+    "package.json",
+    "tooling/turbo.json",
+    "tooling/tsconfig.json",
+    ".gitignore"
+  ],
+  "globalEnv": ["NODE_ENV", "GOOS", "GOARCH"],
+  "globalPassThroughEnv": ["GITHUB_TOKEN", "CI"],
+  "cacheDir": ".turbo/cache",
+  "remoteCache": {
+    "signature": true
+  }
+}
