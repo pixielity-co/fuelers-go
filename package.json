@@ -16,6 +16,7 @@
     "typecheck": "turbo run typecheck",
     "generate": "turbo run generate",
     "clean": "turbo run clean",
+    "cleanup": "pnpm clean && go clean -cache -testcache && rm -rf .turbo node_modules pnpm-lock.yaml go.work.sum && find . -type d -name 'node_modules' -prune -exec rm -rf {} + && find . -type d -name '.turbo' -prune -exec rm -rf {} + && find . -name '*.log' -delete",
     "deploy": "turbo run deploy",
     "format": "pnpm format:prettier && pnpm format:go",
     "format:prettier": "prettier --write .",
