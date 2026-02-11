@@ -5,7 +5,7 @@
 
 **High-Performance Microservices Engineering System**
 
-[![Monorepo Foundation CI](https://github.com/akouta/fuelers-go/actions/workflows/ci.yml/badge.svg)](https://github.com/akouta/fuelers-go/actions/workflows/ci.yml)
+[![Monorepo Foundation CI](https://github.com/pixielity-co/fuelers-go/actions/workflows/ci.yml/badge.svg)](https://github.com/pixielity-co/fuelers-go/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Go Version](https://img.shields.io/badge/Go-1.23-00ADD8.svg?style=flat&logo=go)](https://golang.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-9.x-F69220.svg?style=flat&logo=pnpm)](https://pnpm.io/)
@@ -43,7 +43,7 @@
 
 ```bash
 # Clone and install
-git clone https://github.com/akouta/fuelers-go.git
+git clone https://github.com/pixielity-co/fuelers-go.git
 cd fuelers-go
 pnpm install
 
