@@ -20,7 +20,8 @@ function main() {
   const serviceName = process.argv[2];
   // Parse --env from arguments
   const envArgIdx = process.argv.indexOf("--env");
-  const deployEnv = envArgIdx !== -1 ? process.argv[envArgIdx + 1] : process.env.DEPLOY_ENV;
+  const deployEnv =
+    envArgIdx !== -1 ? process.argv[envArgIdx + 1] : process.env.DEPLOY_ENV || "local";
 
   if (!serviceName) {
     console.error("❌ Error: Service name is required.");
