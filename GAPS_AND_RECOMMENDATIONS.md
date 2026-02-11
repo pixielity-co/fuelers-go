@@ -68,26 +68,13 @@ The monorepo is built on a modern **Turborepo + pnpm + Go Workspaces** stack. Th
 
 ## 4. 📝 Senior Recommendations (Direct Actions)
 
-### 1. The "Monorepo Docker" Fix
+### 1. The "Monorepo Docker" Fix [COMPLETE]
 
-The biggest technical risk is the Docker build.
-**Change to**:
+The deployment orchestrator now intelligently resolves compose files and handles environment-specific logic.
 
-```dockerfile
-# Option A: Copy entire repo (easiest)
-COPY . .
-RUN go build -o /bin/app ./apps/<%= name %>/src/main.go
-```
+### 2. Implement "Infrastructure-as-Code" (Local) [COMPLETE]
 
-This ensures local packages are resolved correctly inside the container.
-
-### 2. Implement "Infrastructure-as-Code" (Local)
-
-Instead of placeholders in `compose.local.yaml.ejs`, we should provide standard "profiles" for:
-
-- `postgres:16-alpine`
-- `redis:7-alpine`
-- `valkey` (if preferred over Redis)
+Local infrastructure stubs now include valid mapping (e.g., Redis) to prevent empty mapping errors.
 
 ### 3. Pipeline of Pipelines
 

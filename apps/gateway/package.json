@@ -11,7 +11,7 @@
     "start": "./bin/gateway",
     "test": "go test -v ./...",
     "lint": "golangci-lint run ./...",
-    "deploy": "echo 'Deploying gateway...'",
+    "deploy": "npx tsx ../../scripts/deploy-service.ts gateway",
     "clean": "rm -rf bin tmp coverage.out",
     "typecheck": "go vet ./...",
     "generate": "go generate ./...",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@packages/logger": "workspace:*"
-  },
+},
   "devDependencies": {},
   "peerDependencies": {}
 }

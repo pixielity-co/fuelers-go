@@ -16,16 +16,8 @@
     },
     "test": {
       "dependsOn": ["build"],
-      "inputs": [
-        "src/**",
-        "cmd/**",
-        "internal/**",
-        "go.mod",
-        "go.sum",
-        "package.json",
-        "**/*_test.go"
-      ],
-      "outputs": ["coverage.out"]
+      "inputs": ["src/**", "env/**", "go.mod", "go.sum", "package.json", "**/*_test.go"],
+      "outputs": []
     },
     "lint": {
       "outputs": []

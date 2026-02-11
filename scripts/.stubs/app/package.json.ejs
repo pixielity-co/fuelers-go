@@ -11,7 +11,7 @@
     "start": "./bin/<%= name %>",
     "test": "go test -v ./...",
     "lint": "golangci-lint run ./...",
-    "deploy": "echo 'Deploying <%= name %>...'",
+    "deploy": "npx tsx ../../scripts/deploy-service.ts <%= name %>",
     "clean": "rm -rf bin tmp coverage.out",
     "typecheck": "go vet ./...",
     "generate": "go generate ./...",

@@ -2,9 +2,9 @@
 # Fuelers Monorepo - Development Environment
 # Service: Gateway
 # ─────────────────────────────────────────────────────────────────────────────
-#
+# 
 # Orchestrates the Gateway service for development.
-#
+# 
 # Usage:
 #   docker compose -f apps/gateway/docker/compose.dev.yaml up --build
 #

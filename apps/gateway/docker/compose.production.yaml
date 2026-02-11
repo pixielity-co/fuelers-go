@@ -2,7 +2,7 @@
 # Fuelers Monorepo - Production Specification
 # Service: Gateway
 # ─────────────────────────────────────────────────────────────────────────────
-#
+# 
 # Definition for the Gateway production environment.
 # Optimized for high availability, security, and resource efficiency.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -27,10 +27,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.50"
+          cpus: '0.50'
           memory: 512M
         reservations:
-          cpus: "0.10"
+          cpus: '0.10'
           memory: 128M
       restart_policy:
         condition: on-failure
